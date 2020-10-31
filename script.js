@@ -18,6 +18,7 @@ let x0 = w / 2
 let y0 = h / 2
 let r = 124 // масштаб
 let d = 6 // координаты x ∈ [-d ; d]
+let b
 
 var canvas = document.getElementById('gr');
 if (canvas.getContext) {
