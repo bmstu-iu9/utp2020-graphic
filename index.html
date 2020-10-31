@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>graphic</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<canvas id="gr" width="748" height="744"></canvas> <br>
+<script src="script.js"></script>
+
+<label for="func">f(x) = </label>
+<input type="text" id="func"> <br>
+
+<label>x ∈ [ <input type="number" id="minX" value="-6"> ; <input type="number" id="maxX" value="6"> ]</label> <br>
+<label>y ∈ [ <input type="number" id="minY" value="-6"> ; <input type="number" id="maxY" value="6"> ]</label> <br>
+
+<label><input type="checkbox" id="autoDiap"> Автодиапазон y</label> <br>
+
+<label for="color-select">Choose a color:</label>
+<select id="color-select">
+    <option value="black">--Please choose an option--</option>
+    <option value="green">Green</option>
+    <option value="red">Red</option>
+    <option value="blue">Blue</option>
+</select> <p></p>
+
+<button class="favorite styled"
+        type="button"
+        onclick="buttonOnClick()">
+    Построить
+</button>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
