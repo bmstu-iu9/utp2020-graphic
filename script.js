@@ -73,7 +73,7 @@ function init() {
     minY = Number(getElVal('minY'))
     maxY = Number(getElVal('maxY'))
     d = Math.max(abs(minX), abs(maxX)) // координаты x ∈ [-d ; d]
-    r = w / (2 * d) // масштаб
+    r = w / (2 * d) // масштаб графика
 }
 
 function getElVal(id) {
