@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/utp_graphic.iml" filepath="$PROJECT_DIR$/.idea/utp_graphic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.gitignore/.idea/utp_graphic.iml" filepath="$PROJECT_DIR$/.gitignore/.idea/utp_graphic.iml" />
     </modules>
   </component>
 </project>
