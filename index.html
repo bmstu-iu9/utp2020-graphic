@@ -15,11 +15,15 @@
 <label>y ∈ [ <input type="number" id="minY" value="-6"> ; <input type="number" id="maxY" value="6"> ]</label> <br>
 
 <!-- Автодиапазон -->
-<label><input type="checkbox" id="autoDiap"> Автодиапазон y</label> <p></p>
+<input type="checkbox"
+       id="autoDiap"
+       onchange="buttonOnClick()">
+<label for="autoDiap"> Автодиапазон y </label> <p></p>
 
 <!-- Выбор цвета -->
 <label for="color-select">Choose a color:</label>
-<select id="color-select">
+<select id="color-select"
+        onchange="buttonOnClick()">
     <option value="black">--Please choose an option--</option>
     <option value="green">Green</option>
     <option value="red">Red</option>
@@ -58,21 +62,3 @@ onclick="buttonOnClick()">
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
