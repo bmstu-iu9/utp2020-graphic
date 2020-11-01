@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <title>Eval</title>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <input id="field" type="text" />
+    <p id="result"></p>
+    <script>
+      const text = document.getElementById('field');
+      const result = document.getElementById('result');
+      text.onchange = (e) => {
+          const value = e.target.value;
+          const f = eval(`(x) => {return ${value}}`);
+          result.innerText = `f(5) = ${f(5)}`;
+      };
+    </script>
+  </body>
+</html>

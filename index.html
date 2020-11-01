@@ -6,31 +6,55 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<canvas id="gr" width="748" height="744"></canvas> <br>
-<script src="script.js"></script>
-
+<!-- f(x) -->
 <label for="func">f(x) = </label>
 <input type="text" id="func"> <br>
 
+<!-- x ∈ [a ; b] -->
 <label>x ∈ [ <input type="number" id="minX" value="-6"> ; <input type="number" id="maxX" value="6"> ]</label> <br>
 <label>y ∈ [ <input type="number" id="minY" value="-6"> ; <input type="number" id="maxY" value="6"> ]</label> <br>
 
-<label><input type="checkbox" id="autoDiap"> Автодиапазон y</label> <br>
+<!-- Автодиапазон -->
+<label><input type="checkbox" id="autoDiap"> Автодиапазон y</label> <p></p>
 
+<!-- Выбор цвета -->
 <label for="color-select">Choose a color:</label>
 <select id="color-select">
     <option value="black">--Please choose an option--</option>
     <option value="green">Green</option>
     <option value="red">Red</option>
     <option value="blue">Blue</option>
-</select> <p></p>
+</select>
 
-<button class="favorite styled"
-        type="button"
-        onclick="buttonOnClick()">
+<!-- Масштаб всего -->
+<div>
+    <label for="scale">Масштаб всего: </label>
+    <input type="range" id="scale"
+           min="300" max="700" value="600" step="10"
+           oninput="buttonOnClick()">
+    <b id="scVal"></b>
+</div>
+
+<!-- Масштаб графика -->
+<div>
+    <label for="scaleGr">Масштаб графика: </label>
+    <input type="range" id="scaleGr"
+           min="10" max="300" value="50" step="10"
+           oninput="rangeOnMoveGr()">
+    <b id="scValGr"></b>
+</div> <p></p>
+
+<!-- Кнопка -->
+<button
+    class="favorite styled"
+    type="button"
+    id="btn"
+onclick="buttonOnClick()">
     Построить
-</button>
+</button> <p></p>
+
+<canvas id="gr" width="600" height="600"></canvas>
+<script src="script.js"></script>
 
 </body>
 </html>

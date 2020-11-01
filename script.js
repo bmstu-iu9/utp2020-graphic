@@ -12,18 +12,11 @@ let arccos = Math.acos;
 let arctg = Math.atan;
 function arcctg(x) { return Math.PI * .5 - arctg(x) }
 
-let w = Number(document.getElementById('gr').width);
-let h = Number(document.getElementById('gr').height);
-let x0 = w / 2
-let y0 = h / 2
-let r = 124 // масштаб
-let d = 6 // координаты x ∈ [-d ; d]
-let b
+let canvas = document.getElementById('gr');
+let ctx = canvas.getContext('2d');
 
-var canvas = document.getElementById('gr');
-if (canvas.getContext) {
-    var ctx = canvas.getContext('2d');
-}
+let minX, maxX, minY, maxY
+let w, h, x0, y0, d, r
 
 function coordSyst() {
     ctx.fillStyle = 'black';
@@ -45,26 +38,42 @@ function coordSyst() {
 
     // клетки
     ctx.fillStyle = 'grey';
-    for (let i = 0; i < 2 * d; i++) {
-        // создать
-        ctx.fillRect(r * i, 0, 1, h)
-        ctx.fillRect(0, r * i, w, 1)
+    for (let i = -d * 10; i <= d * 10; i++) {
+        ctx.fillRect(x0 + r * i, 0, 1, h)
+        ctx.fillRect(0, y0 + r * i, w, 1)
     }
 
     // обозначение осей
     ctx.fillStyle = 'blue';
     ctx.font = "25px Roman";
-    ctx.fillText("Y", 385, 25);
-    ctx.fillText("X", 720, 355);
+    ctx.fillText("Y", x0 + 10, 25);
+    ctx.fillText("X", w - 25, y0 - 17);
 
     ctx.font = "20px Roman";
-    ctx.fillText("0", x0 + 5, 400);
-    for (let i = -d; i < d; i++) {
+    ctx.fillText("0", x0 + 5, y0 + 25);
+    for (let i = -d; i <= d; i++) {
         if (i !== 0) {
-            ctx.fillText(String(i), x0 + r * i, 400);
-            ctx.fillText(String(i), 380, y0 - r * i + 12);
+            ctx.fillText(String(i), x0 + r * i, x0 + 25);
+            ctx.fillText(String(i), x0 + 10, y0 - r * i + 8);
         }
     }
+}
+
+function scale() {
+    canvas.width = canvas.height = getElVal('scale')
+    document.getElementById('scVal').innerText = canvas.width + ' x ' + canvas.height
+}
+
+function init() {
+    w = h = getElVal('scale')
+    x0 = w / 2
+    y0 = h / 2
+    minX = Number(getElVal('minX'))
+    maxX = Number(getElVal('maxX'))
+    minY = Number(getElVal('minY'))
+    maxY = Number(getElVal('maxY'))
+    d = Math.max(abs(minX), abs(maxX)) // координаты x ∈ [-d ; d]
+    r = w / (2 * d) // масштаб
 }
 
 function getElVal(id) {
@@ -72,21 +81,16 @@ function getElVal(id) {
 }
 
 function clear() {
-    ctx.clearRect(0,0, w, h); //стирает canvas
+    ctx.clearRect(0,0, w, h);
 }
+
 function draw() {
-    let minX = Number(getElVal('minX'))
-    let maxX = Number(getElVal('maxX'))
-    let minY = Number(getElVal('minY'))
-    let maxY = Number(getElVal('maxY'))
     ctx.fillStyle = ctx.strokeStyle = getElVal('color-select');
 
     let f = Function('x', 'return ' + getElVal('func'))
-    d = Math.max(abs(minX), abs(maxX))
-    r = w / (2 * d)
     ctx.beginPath();
     ctx.moveTo(x0 + r * minX, y0 - Math.round(r * f(minX)));
-    for (let i = minX; i < maxX; i += 0.0001) {
+    for (let i = minX; i < maxX; i += 0.001) {
         let x = x0 + r * i
         let y = y0 - Math.round(r * f(i))
         if (y < 0 || y > h) { // для tg(x), чтоб не все точки соединять
@@ -103,14 +107,24 @@ function draw() {
         ctx.clearRect(0, 0, w, y0 - r * maxY);
         ctx.clearRect(0,y0 - r * minY, w, h);
     }
+
+    coordSyst()
 }
 
 function buttonOnClick() {
     try {
-        clear();
-        draw();
-        coordSyst();
-    } catch (e) {
+        clear()
+        scale()
+        init()
+        draw()
+    } catch (er) {
         alert('НЕВЕРНЫЕ ВХОДНЫЕ ДАННЫЕ!')
     }
+}
+
+function rangeOnMoveGr() {
+    clear()
+    r = getElVal('scaleGr')
+    draw()
+    document.getElementById('scValGr').innerText = ' x ' + getElVal('scaleGr') / 50
 }
